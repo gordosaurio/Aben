@@ -59,11 +59,63 @@ class TaskModel {
     }
 
     public function updateTask($id, $title, $description, $status) {
-        echo "Executing updateTask($id)\n";
-        $query = "UPDATE tasks SET title = ?, description = ?, status = ? WHERE id = ?";
+        echo "Executing updateTask(id: $id)\n";
+    
+        // Validar que el ID sea un número válido
+        if (!is_numeric($id) || $id <= 0) {
+            echo "Error: ID inválido\n";
+            echo json_encode(["error" => "ID inválido"]);
+            return false;
+        }
+    
+        // Construcción dinámica del query según los campos enviados
+        $fields = [];
+        $params = [];
+        $types = "";
+    
+        if (!empty($title)) {
+            $fields[] = "title = ?";
+            $params[] = $title;
+            $types .= "s";
+        }
+        if (!empty($description)) {
+            $fields[] = "description = ?";
+            $params[] = $description;
+            $types .= "s";
+        }
+        if ($status !== null) {
+            $fields[] = "status = ?";
+            $params[] = $status;
+            $types .= "i";
+        }
+    
+        // Si no se proporcionó ningún campo válido, no se ejecuta la actualización
+        if (empty($fields)) {
+            echo "Error: No se proporcionaron campos para actualizar\n";
+            echo json_encode(["error" => "Debes proporcionar al menos un campo para actualizar"]);
+            return false;
+        }
+    
+        // Construir la consulta SQL dinámicamente
+        $query = "UPDATE tasks SET " . implode(", ", $fields) . " WHERE id = ?";
+        $params[] = $id;
+        $types .= "i";
+    
+        // Preparar y ejecutar la consulta
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("sssi", $title, $description, $status, $id);
-        return $stmt->execute();
+        $stmt->bind_param($types, ...$params);
+        
+        $success = $stmt->execute();
+    
+        if ($success) {
+            echo "✅ Tarea actualizada exitosamente\n";
+            echo json_encode(["success" => true, "message" => "Tarea actualizada correctamente"]);
+        } else {
+            echo "❌ Error al actualizar la tarea\n";
+            echo json_encode(["error" => "No se pudo actualizar la tarea"]);
+        }
+    
+        return $success;
     }
 
     public function deleteTask($id) {
