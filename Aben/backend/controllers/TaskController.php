@@ -15,9 +15,7 @@ class TaskController {
     }
 
     public function getTask($id) {
-        echo "Entering getTask($id)\n";
         $task = $this->taskModel->getTaskById($id);
-        echo "Exiting getTask($id)\n";
         if ($task) {
             echo json_encode(["success" => true, "task" => $task]);
         } else {
@@ -26,7 +24,6 @@ class TaskController {
     }
 
     public function createTask($data) {
-        echo "Entering createTask()\n";
         $title = $data['title'] ?? null;
         $description = $data['description'] ?? null;
         $status = $data['status'] ?? 'pending';
@@ -38,7 +35,6 @@ class TaskController {
         }
 
         $result = $this->taskModel->createTask($title, $description, $status);
-        echo "Exiting createTask()\n";
         echo json_encode(["success" => $result, "message" => $result ? "Task created successfully" : "Failed to create task"]);
     }
 

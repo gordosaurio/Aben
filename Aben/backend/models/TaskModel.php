@@ -16,7 +16,6 @@ class TaskModel {
     }
 
     public function getTaskById($id) {
-        echo "Executing getTaskById($id)\n";
         $query = "SELECT * FROM tasks WHERE id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("i", $id);
@@ -25,11 +24,38 @@ class TaskModel {
     }
 
     public function createTask($title, $description, $status) {
-        echo "Executing createTask()\n";
+        // Verificar que title no sea NULL o vacío
+        if (!$title || trim($title) === '') {
+            echo json_encode(["error" => "El campo 'title' es obligatorio"]);
+            return false;
+        }
+    
+        // Verificar que status sea 0 o 1 (tinyint)
+        if (!in_array($status, [0, 1], true)) {
+            echo json_encode(["error" => "El campo 'status' debe ser 0 o 1"]);
+            return false;
+        }
+    
+        // Preparar la consulta
         $query = "INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("sss", $title, $description, $status);
-        return $stmt->execute();
+    
+        if (!$stmt) {
+            echo json_encode(["error" => "Error en la preparación de la consulta: " . $this->conn->error]);
+            return false;
+        }
+    
+        // Bind de parámetros
+        $stmt->bind_param("ssi", $title, $description, $status);
+    
+        // Ejecutar la consulta y verificar errores
+        if (!$stmt->execute()) {
+            echo json_encode(["error" => "Error al insertar en la base de datos: " . $stmt->error]);
+            return false;
+        }
+    
+        echo json_encode(["success" => true, "message" => "Task creada exitosamente"]);
+        return true;
     }
 
     public function updateTask($id, $title, $description, $status) {
