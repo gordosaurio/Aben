@@ -1,9 +1,24 @@
-const API_URL = "http://localhost/backend/api.php";
+const API_URL = "http://localhost:8000";
 
 // Obtener todas las tareas
 async function getTasks() {
-    const response = await fetch(`${API_URL}?action=getTasks`);
-    return response.json();
+    try {
+        console.log("Iniciando solicitud para obtener tareas...");
+        const response = await fetch(`${API_URL}?action=getTasks`);
+        
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log("Tareas obtenidas con éxito:", data);
+        return data;
+    } catch (error) {
+        console.error("Error al obtener tareas:", error);
+        return [];
+    } finally {
+        console.log("Finalizando solicitud para obtener tareas.");
+    }
 }
 
 // Crear una nueva tarea
