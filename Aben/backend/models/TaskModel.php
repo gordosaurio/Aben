@@ -119,11 +119,38 @@ class TaskModel {
     }
 
     public function deleteTask($id) {
-        echo "Executing deleteTask($id)\n";
+        echo "🔹 Ejecutando deleteTask($id)...\n";
+    
+        // Validar que el ID sea un número entero válido
+        if (!is_numeric($id) || $id <= 0) {
+            echo "❌ Error: El ID proporcionado no es válido.\n";
+            return false;
+        }
+    
+        // Preparar la consulta SQL
         $query = "DELETE FROM tasks WHERE id = ?";
         $stmt = $this->conn->prepare($query);
+    
+        if (!$stmt) {
+            echo "❌ Error al preparar la consulta: " . $this->conn->error . "\n";
+            return false;
+        }
+    
+        // Asignar el parámetro
         $stmt->bind_param("i", $id);
-        return $stmt->execute();
+    
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
+                echo "✅ Tarea con ID $id eliminada exitosamente.\n";
+            } else {
+                echo "⚠️ Advertencia: No se encontró ninguna tarea con ID $id.\n";
+            }
+            return true;
+        } else {
+            echo "❌ Error al eliminar la tarea: " . $stmt->error . "\n";
+            return false;
+        }
     }
 }
 ?>
