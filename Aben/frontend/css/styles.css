@@ -1,0 +1,23 @@
+.task {
+  background: #f9f9f9;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
+
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer; }
+  button:hover {
+    opacity: 0.8; }
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px; }
+
+/*# sourceMappingURL=styles.css.map */

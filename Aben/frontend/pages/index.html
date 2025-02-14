@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestor de Tareas</h1>
+        <form id="taskForm">
+            <input type="text" id="title" placeholder="Título" required>
+            <textarea id="description" placeholder="Descripción"></textarea>
+            <button type="submit">Crear Tarea</button>
+        </form>
+        <ul id="taskList"></ul>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
