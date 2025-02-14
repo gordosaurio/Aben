@@ -2,6 +2,9 @@
 require_once __DIR__ . '/../db/database.php';
 require_once __DIR__ . '/../controllers/TaskController.php';
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json");
 
 // Usamos la conexión desde database.php
@@ -16,7 +19,6 @@ $method = $_SERVER['REQUEST_METHOD'];
 $uri = explode("/", trim($_SERVER['REQUEST_URI'], "/"));
 
 if (!isset($uri[0]) || $uri[0] !== "tasks") {
-    echo "Invalid endpoint\n";
     echo json_encode(["error" => "Invalid endpoint"]);
     exit;
 }
@@ -31,13 +33,11 @@ switch ($method) {
         break;
 
     case "POST":
-        echo "POST request detected\n";
         $data = json_decode(file_get_contents("php://input"), true);
         $taskController->createTask($data);
         break;
 
     case "PUT":
-        echo "PUT request detected\n";
         if (isset($uri[1])) {
             $data = json_decode(file_get_contents("php://input"), true);
             $taskController->updateTask($uri[1], $data);
@@ -47,7 +47,6 @@ switch ($method) {
         break;
 
     case "DELETE":
-        echo "DELETE request detected\n";
         if (isset($uri[1])) {
             $taskController->deleteTask($uri[1]);
         } else {
@@ -56,7 +55,6 @@ switch ($method) {
         break;
 
     default:
-        echo "Invalid request method\n";
         echo json_encode(["error" => "Invalid request method"]);
         break;
 }

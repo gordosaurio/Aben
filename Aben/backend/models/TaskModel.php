@@ -6,7 +6,6 @@ class TaskModel {
 
     public function __construct($db) {
         $this->conn = $db;
-        echo "TaskModel initialized\n";
     }
 
     public function getAllTasks() {
@@ -59,11 +58,8 @@ class TaskModel {
     }
 
     public function updateTask($id, $title, $description, $status) {
-        echo "Executing updateTask(id: $id)\n";
-    
         // Validar que el ID sea un número válido
         if (!is_numeric($id) || $id <= 0) {
-            echo "Error: ID inválido\n";
             echo json_encode(["error" => "ID inválido"]);
             return false;
         }
@@ -91,7 +87,6 @@ class TaskModel {
     
         // Si no se proporcionó ningún campo válido, no se ejecuta la actualización
         if (empty($fields)) {
-            echo "Error: No se proporcionaron campos para actualizar\n";
             echo json_encode(["error" => "Debes proporcionar al menos un campo para actualizar"]);
             return false;
         }
@@ -108,10 +103,8 @@ class TaskModel {
         $success = $stmt->execute();
     
         if ($success) {
-            echo "✅ Tarea actualizada exitosamente\n";
             echo json_encode(["success" => true, "message" => "Tarea actualizada correctamente"]);
         } else {
-            echo "❌ Error al actualizar la tarea\n";
             echo json_encode(["error" => "No se pudo actualizar la tarea"]);
         }
     
@@ -119,11 +112,8 @@ class TaskModel {
     }
 
     public function deleteTask($id) {
-        echo "🔹 Ejecutando deleteTask($id)...\n";
-    
         // Validar que el ID sea un número entero válido
         if (!is_numeric($id) || $id <= 0) {
-            echo "❌ Error: El ID proporcionado no es válido.\n";
             return false;
         }
     
@@ -132,7 +122,6 @@ class TaskModel {
         $stmt = $this->conn->prepare($query);
     
         if (!$stmt) {
-            echo "❌ Error al preparar la consulta: " . $this->conn->error . "\n";
             return false;
         }
     
@@ -141,14 +130,8 @@ class TaskModel {
     
         // Ejecutar la consulta
         if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                echo "✅ Tarea con ID $id eliminada exitosamente.\n";
-            } else {
-                echo "⚠️ Advertencia: No se encontró ninguna tarea con ID $id.\n";
-            }
             return true;
         } else {
-            echo "❌ Error al eliminar la tarea: " . $stmt->error . "\n";
             return false;
         }
     }
