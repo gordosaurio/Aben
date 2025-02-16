@@ -96,6 +96,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         await createTask(createTaskTitle.value, createTaskDescription.value);
         confirmCreateModal.style.display = "none"; // Cerrar modal
         await loadTasks(); // Recargar lista
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
     });
 
     // Cancelar la creación
