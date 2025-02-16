@@ -16,9 +16,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const confirmDelete = document.getElementById("confirmDelete");
     const cancelDelete = document.getElementById("cancelDelete");
 
+    // Elementos del modal de confirmación de creación
+    const confirmCreateModal = document.getElementById("confirmCreateModal");
+    const confirmCreate = document.getElementById("confirmCreate");
+    const cancelCreate = document.getElementById("cancelCreate");
+    const createTaskTitle = document.getElementById("createTaskTitle");
+    const createTaskDescription = document.getElementById("createTaskDescription");
+
     // Función para cargar tareas
     async function loadTasks() {
-        taskList.innerHTML = ""; 
+        taskList.innerHTML = "";
         const data = await getTasks();
         const tasks = data.tasks || [];
 
@@ -30,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             // Botón de eliminar
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Eliminar";
-            deleteButton.onclick = () => openDeleteModal(task.id); // Abre modal de confirmación
+            deleteButton.onclick = () => openDeleteModal(task.id);
 
             // Botón de editar
             const updateButton = document.createElement("button");
@@ -73,16 +80,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         const id = deleteTaskId.value;
         await deleteTask(id);
         confirmDeleteModal.style.display = "none"; // Cerrar modal
+        await loadTasks();
+    });
+
+    // Abrir modal de confirmación antes de crear una tarea
+    taskForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        createTaskTitle.value = document.getElementById("title").value;
+        createTaskDescription.value = document.getElementById("description").value;
+        confirmCreateModal.style.display = "flex"; 
+    });
+
+    // Confirmar la creación de la tarea
+    confirmCreate.addEventListener("click", async () => {
+        await createTask(createTaskTitle.value, createTaskDescription.value);
+        confirmCreateModal.style.display = "none"; // Cerrar modal
         await loadTasks(); // Recargar lista
     });
 
-    // Crear tarea
-    taskForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const title = document.getElementById("title").value;
-        const description = document.getElementById("description").value;
-        await createTask(title, description);
-        await loadTasks();
+    // Cancelar la creación
+    cancelCreate.addEventListener("click", () => {
+        confirmCreateModal.style.display = "none"; 
     });
 
     await loadTasks();

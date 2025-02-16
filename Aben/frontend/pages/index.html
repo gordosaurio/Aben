@@ -42,6 +42,17 @@
         </div>
     </div>
 
+    <!-- Modal de confirmación de creación -->
+    <div id="confirmCreateModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Creación</h2>
+            <p>¿Estás seguro de que deseas crear esta tarea?</p>
+            <input type="hidden" id="createTaskTitle">
+            <input type="hidden" id="createTaskDescription">
+            <button id="confirmCreate">Crear</button>
+            <button id="cancelCreate">Cancelar</button>
+        </div>
+    </div>
 
     <script src="../js/api.js"></script>
     <script src="../js/main.js"></script>
