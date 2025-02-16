@@ -48,3 +48,17 @@ async function deleteTask(id) {
         return { success: false, error: error.message };
     }
 }
+
+async function updateTask(id, title, description) {
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description })
+    });
+
+    if (!response.ok) {
+        console.error("Error al actualizar la tarea");
+    }
+
+    return response.json();
+}
