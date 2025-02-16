@@ -50,21 +50,11 @@ async function createTask(title, description) {
         headers: { "Content-Type": "application/json" }
     });
 
-    console.log("Vamos a mostrar la respuesta:");
+    console.log("vamos a mostrar la respuesta");
     console.log(response);
 
-    // Validar si la respuesta tiene contenido
-    const text = await response.text();
-    console.log("Respuesta como texto:", text);
-
-    try {
-        return JSON.parse(text); // Intentar convertir solo si el texto no está vacío
-    } catch (error) {
-        console.error("Error al parsear JSON:", error);
-        return {}; // Retornar un objeto vacío en caso de error
-    }
+    return response.json();
 }
-
 
 
 
