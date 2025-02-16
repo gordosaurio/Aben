@@ -21,87 +21,26 @@ async function getTasks() {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Crear una nueva tarea
 async function createTask(title, description) {
-    console.log("Entrando a createTask...");
-    
     const response = await fetch(`${API_URL}`, {
         method: "POST",
         body: JSON.stringify({ title, description }),
         headers: { "Content-Type": "application/json" }
     });
-
-    console.log("vamos a mostrar la respuesta");
-    console.log(response);
-
     return response.json();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Eliminar tarea
 async function deleteTask(id) {
     try {
         const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
 
-        console.log("vamos a mostrar la respuesta de eliminar");
-        console.log(response);
-
         if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log("Respuesta del servidor:", data);
-
         return data;
 
     } catch (error) {
