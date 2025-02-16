@@ -34,7 +34,7 @@ class TaskModel {
             echo json_encode(["error" => "El campo 'status' debe ser 0 o 1"]);
             return false;
         }
-    
+
         // Preparar la consulta
         $query = "INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($query);
@@ -52,8 +52,7 @@ class TaskModel {
             echo json_encode(["error" => "Error al insertar en la base de datos: " . $stmt->error]);
             return false;
         }
-    
-        echo json_encode(["success" => true, "message" => "Task creada exitosamente"]);
+
         return true;
     }
 

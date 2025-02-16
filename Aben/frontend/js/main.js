@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Crear tarea
     taskForm.addEventListener("submit", async (event) => {
+        console.log("entro al main");
         event.preventDefault();
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;

@@ -25,15 +25,19 @@ class TaskController {
     public function createTask($data) {
         $title = $data['title'] ?? null;
         $description = $data['description'] ?? null;
-        $status = $data['status'] ?? 'pending';
+        $status = isset($data['status']) ? (int)$data['status'] : 1; // Siempre 1 por defecto
 
         if (!$title) {
             echo json_encode(["error" => "Title is required"]);
             return;
         }
-
+    
         $result = $this->taskModel->createTask($title, $description, $status);
-        echo json_encode(["success" => $result, "message" => $result ? "Task created successfully" : "Failed to create task"]);
+
+        echo json_encode([
+            "success" => $result, 
+            "message" => $result ? "Task created successfully" : "Failed to create task"
+        ]);
     }
 
     public function updateTask($id, $data) {

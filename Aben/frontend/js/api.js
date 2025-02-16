@@ -22,15 +22,80 @@ async function getTasks() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Crear una nueva tarea
 async function createTask(title, description) {
-    const response = await fetch(`${API_URL}?action=createTask`, {
+    console.log("Entrando a createTask...");
+    
+    const response = await fetch(`${API_URL}`, {
         method: "POST",
         body: JSON.stringify({ title, description }),
         headers: { "Content-Type": "application/json" }
     });
-    return response.json();
+
+    console.log("Vamos a mostrar la respuesta:");
+    console.log(response);
+
+    // Validar si la respuesta tiene contenido
+    const text = await response.text();
+    console.log("Respuesta como texto:", text);
+
+    try {
+        return JSON.parse(text); // Intentar convertir solo si el texto no está vacío
+    } catch (error) {
+        console.error("Error al parsear JSON:", error);
+        return {}; // Retornar un objeto vacío en caso de error
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Eliminar tarea
 async function deleteTask(id) {
