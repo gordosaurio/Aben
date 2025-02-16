@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cargar tareas
     async function loadTasks() {
-        const taskList = document.getElementById("taskList"); // Asegurar que el elemento existe
         if (!taskList) return console.error("Elemento 'taskList' no encontrado.");
     
         taskList.innerHTML = ""; // Limpiar la lista antes de agregar nuevas tareas
@@ -14,20 +13,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         tasks.forEach(task => {
             const li = document.createElement("li");
             
-            // Usar textContent en lugar de innerHTML por seguridad
             const taskText = document.createElement("span");
             taskText.textContent = `${task.title} - ${task.description}`;
     
             // Botón de eliminar
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Eliminar";
-            deleteButton.onclick = () => deleteTask(task.id);
+            deleteButton.onclick = async () => {
+                await deleteTask(task.id);
+                await loadTasks(); // 🔄 Recargar lista después de eliminar
+            };
     
-            // Agregar elementos al <li>
             li.appendChild(taskText);
             li.appendChild(deleteButton);
-            
-            // Agregar la tarea a la lista
             taskList.appendChild(li);
         });
     }
@@ -38,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
         await createTask(title, description);
-        loadTasks();
+        await loadTasks();
     });
 
     await loadTasks();

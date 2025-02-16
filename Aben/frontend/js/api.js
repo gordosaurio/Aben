@@ -46,6 +46,7 @@ async function deleteTask(id) {
 
         const data = await response.json();
         console.log("Respuesta del servidor:", data);
+
         return data;
 
     } catch (error) {
