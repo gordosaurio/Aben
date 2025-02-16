@@ -31,6 +31,18 @@
         </div>
     </div>
 
+    <!-- Modal de confirmación de eliminación -->
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+            <input type="hidden" id="deleteTaskId"> <!-- Para almacenar el ID de la tarea -->
+            <button id="confirmDelete">Eliminar</button>
+            <button id="cancelDelete">Cancelar</button>
+        </div>
+    </div>
+
+
     <script src="../js/api.js"></script>
     <script src="../js/main.js"></script>
 </body>

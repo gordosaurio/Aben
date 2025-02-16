@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const taskList = document.getElementById("taskList");
     const taskForm = document.getElementById("taskForm");
 
-    // Elementos del modal
+    // Elementos del modal de edición
     const editModal = document.getElementById("editModal");
     const editForm = document.getElementById("editForm");
     const editTaskId = document.getElementById("editTaskId");
@@ -10,33 +10,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     const editDescription = document.getElementById("editDescription");
     const closeModal = document.getElementById("closeModal");
 
+    // Elementos del modal de confirmación de eliminación
+    const confirmDeleteModal = document.getElementById("confirmDeleteModal");
+    const deleteTaskId = document.getElementById("deleteTaskId");
+    const confirmDelete = document.getElementById("confirmDelete");
+    const cancelDelete = document.getElementById("cancelDelete");
+
     // Función para cargar tareas
     async function loadTasks() {
-        if (!taskList) return console.error("Elemento 'taskList' no encontrado.");
-    
-        taskList.innerHTML = ""; // Limpiar la lista antes de agregar nuevas tareas
+        taskList.innerHTML = ""; 
         const data = await getTasks();
         const tasks = data.tasks || [];
-    
+
         tasks.forEach(task => {
             const li = document.createElement("li");
-            
             const taskText = document.createElement("span");
             taskText.textContent = `${task.title} - ${task.description}`;
-    
+
             // Botón de eliminar
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Eliminar";
-            deleteButton.onclick = async () => {
-                await deleteTask(task.id);
-                await loadTasks(); // 🔄 Recargar lista después de eliminar
-            };
+            deleteButton.onclick = () => openDeleteModal(task.id); // Abre modal de confirmación
 
             // Botón de editar
             const updateButton = document.createElement("button");
             updateButton.textContent = "Editar";
-            updateButton.onclick = () => openEditModal(task); // Abrir modal con datos de la tarea
-    
+            updateButton.onclick = () => openEditModal(task);
+
             li.appendChild(taskText);
             li.appendChild(deleteButton);
             li.appendChild(updateButton);
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // Función para abrir el modal y llenar los inputs con los datos de la tarea
+    // Función para abrir el modal de edición
     function openEditModal(task) {
         editTaskId.value = task.id;
         editTitle.value = task.title;
@@ -52,20 +52,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         editModal.style.display = "flex";
     }
 
-    // Cerrar el modal al hacer clic en "Cancelar"
+    // Función para abrir el modal de confirmación de eliminación
+    function openDeleteModal(id) {
+        deleteTaskId.value = id;
+        confirmDeleteModal.style.display = "flex";
+    }
+
+    // Cerrar el modal de edición
     closeModal.addEventListener("click", () => {
         editModal.style.display = "none";
     });
 
-    // Evento para actualizar la tarea cuando se envía el formulario del modal
-    editForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const id = editTaskId.value;
-        const title = editTitle.value;
-        const description = editDescription.value;
+    // Cerrar el modal de eliminación al cancelar
+    cancelDelete.addEventListener("click", () => {
+        confirmDeleteModal.style.display = "none";
+    });
 
-        await updateTask(id, title, description); // Actualizar tarea en el backend
-        editModal.style.display = "none"; // Cerrar modal
+    // Confirmar eliminación de la tarea
+    confirmDelete.addEventListener("click", async () => {
+        const id = deleteTaskId.value;
+        await deleteTask(id);
+        confirmDeleteModal.style.display = "none"; // Cerrar modal
         await loadTasks(); // Recargar lista
     });
 
