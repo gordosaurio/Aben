@@ -29,12 +29,16 @@
     <div id="editModal" class="modal">
         <div class="modal-content">
             <h2>Editar Tarea</h2>
-            <form id="editForm">
+            <form id="editForm" class="modal-form">
                 <input type="hidden" id="editTaskId"> <!-- Para almacenar el ID de la tarea -->
                 <input type="text" id="editTitle" placeholder="Nuevo título" required>
                 <textarea id="editDescription" placeholder="Nueva descripción"></textarea>
-                <button type="submit">Guardar Cambios</button>
-                <button type="button" id="closeModal">Cancelar</button>
+                
+                <!-- Contenedor de botones para que estén en dos columnas -->
+                <div class="button-container">
+                    <button type="submit">Guardar Cambios</button>
+                    <button type="button" id="closeModal">Cancelar</button>
+                </div>
             </form>
         </div>
     </div>
