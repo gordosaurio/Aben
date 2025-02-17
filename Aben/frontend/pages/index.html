@@ -54,6 +54,26 @@
         </div>
     </div>
 
+    <!-- Modal para Activar Tarea -->
+    <div id="confirmActivateModal" class="modal">
+        <div class="modal-content">
+            <h2>¿Deseas activar esta tarea?</h2>
+            <input type="hidden" id="activateTaskId">
+            <button id="confirmActivate">Sí, Activar</button>
+            <button id="cancelActivate">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal para Desactivar Tarea -->
+    <div id="confirmDeactivateModal" class="modal">
+        <div class="modal-content">
+            <h2>¿Deseas desactivar esta tarea?</h2>
+            <input type="hidden" id="deactivateTaskId">
+            <button id="confirmDeactivate">Sí, Desactivar</button>
+            <button id="cancelDeactivate">Cancelar</button>
+        </div>
+    </div>
+
     <script src="../js/api.js"></script>
     <script src="../js/main.js"></script>
 </body>

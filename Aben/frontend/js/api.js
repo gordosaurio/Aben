@@ -12,6 +12,9 @@ async function getTasks() {
         // Obtener el contenido como texto antes de intentar parsear JSON
         const text = await response.text();
 
+        console.log("vamos a mostrar el text");
+        console.log(text);
+
         // Intentar convertir a JSON
         const data = JSON.parse(text);
         return data;
@@ -62,6 +65,22 @@ async function updateTask(id, title, description) {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description }) // Enviar solo title y description
+    });
+
+    if (!response.ok) {
+        throw new Error("Error al actualizar la tarea");
+    }
+
+    return response.json();
+}
+
+async function updateTaskStatus(id, status) {
+    console.log("Enviando solicitud PUT a:", `${API_URL}/tasks/${id}`);
+
+    const response = await fetch(`${API_URL}/tasks/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status })
     });
 
     if (!response.ok) {

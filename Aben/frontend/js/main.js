@@ -44,9 +44,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             updateButton.textContent = "Editar";
             updateButton.onclick = () => openEditModal(task);
 
+            // Botón activar
+            const activateButton = document.createElement("button");
+            activateButton.textContent = "Activar";
+            activateButton.onclick = () => openActivateModal(task.id);
+
+            // Botón desactivar
+            const deactivateButton = document.createElement("button");
+            deactivateButton.textContent = "Desactivar";
+            deactivateButton.onclick = () => openDeactivateModal(task.id);
+
             li.appendChild(taskText);
             li.appendChild(deleteButton);
             li.appendChild(updateButton);
+            li.appendChild(activateButton);
+            li.appendChild(deactivateButton);
             taskList.appendChild(li);
         });
     }
@@ -55,6 +67,50 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
+
+
+
+
+
+
+
+    // Función para abrir el modal de activación
+    function openActivateModal(id) {
+        activateTaskId.value = id;
+        confirmActivateModal.style.display = "flex";
+    }
+
+    // Función para abrir el modal de desactivación
+    function openDeactivateModal(id) {
+        deactivateTaskId.value = id;
+        confirmDeactivateModal.style.display = "flex";
+    }
+
+    // Confirmar activación
+    confirmActivate.addEventListener("click", async () => {
+        const id = activateTaskId.value;
+        await updateTaskStatus(id, 1); // 1 = Activar
+        confirmActivateModal.style.display = "none"; // Cerrar modal
+        await loadTasks();
+    });
+
+    // Confirmar desactivación
+    confirmDeactivate.addEventListener("click", async () => {
+        const id = deactivateTaskId.value;
+        await updateTaskStatus(id, 0); // 0 = Desactivar
+        confirmDeactivateModal.style.display = "none"; // Cerrar modal
+        await loadTasks();
+    });
+
+    // Cancelar activación
+    cancelActivate.addEventListener("click", () => {
+        confirmActivateModal.style.display = "none";
+    });
+
+    // Cancelar desactivación
+    cancelDeactivate.addEventListener("click", () => {
+        confirmDeactivateModal.style.display = "none";
+    });
 
 
 
