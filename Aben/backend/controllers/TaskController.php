@@ -47,7 +47,7 @@ class TaskController {
     
         $result = $this->taskModel->updateTask($id, $title, $description, $status);
     
-        // 🔥 Aquí solo se imprime JSON una vez
+        // Aquí solo se imprime JSON una vez
         echo json_encode($result);
     }
 

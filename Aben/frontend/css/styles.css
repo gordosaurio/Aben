@@ -1,22 +1,33 @@
+/* Estilo General del Body */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* Contenedor Principal */
 .container {
   text-align: center;
   width: 100%;
   height: 80vh;
 }
 
+/* Diseño del Formulario */
 .form-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* La columna izquierda es más ancha */
+  grid-template-columns: 2fr 1fr; /* Columna izquierda más ancha */
   gap: 10px;
   align-items: stretch; /* Asegura que las columnas tengan la misma altura */
 }
 
+/* Agrupación de Inputs */
 .input-group {
   display: flex;
   flex-direction: column; /* Los inputs se apilan en columna */
   gap: 10px; /* Espacio entre el título y la descripción */
 }
 
+/* Estilo de Botón Crear Tarea */
 .createTask {
   background-color: white;
   color: black;
@@ -30,36 +41,35 @@
   align-items: center;
 }
 
+/* Estilo de Tareas */
 .task {
   background: #f9f9f9;
   padding: 15px;
   margin: 10px 0;
   border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
 
+/* Botones */
 button {
   background-color: transparent;
   color: black;
   border: none;
   border-radius: 8px;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
+button:hover {
+  opacity: 0.8;
+}
+
+/* Estilo de Iconos dentro de Botones */
 .color-icon {
   border: 2px solid black;
   color: black;
 }
 
-button:hover {
-    opacity: 0.8; 
-}
-
-body {
-  font-family: "Arial", sans-serif;
-  background-color: #f0f0f0;
-  padding: 20px; 
-}
-
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -80,28 +90,34 @@ body {
   text-align: center;
 }
 
+/* Estilo de Texto Tachado */
 .strikethrough {
   text-decoration: line-through;
   color: gray;
 }
 
+/* Estilo de Listas */
 ul {
   list-style-type: none; /* Elimina el marcador predeterminado */
   padding-left: 0; /* Elimina el espacio de la izquierda */
 }
 
+/* Espaciado de Botones dentro de Listas */
 li button {
   margin-left: 1%; /* Espacio entre los botones */
 }
 
+/* Espaciado entre íconos y texto */
 li i {
   margin-right: 1%; /* Espacio entre el ícono y el texto */
 }
 
+/* Alineación de Texto en Listas */
 .text-li {
   text-align: left;
 }
 
+/* Estilo de tamaño de elementos en lista */
 .size-li {
   font-size: 2rem;
 }
