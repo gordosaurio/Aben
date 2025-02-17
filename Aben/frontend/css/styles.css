@@ -98,6 +98,10 @@ li i {
   margin-right: 1%; /* Espacio entre el ícono y el texto */
 }
 
-.color-prueba {
-  background-color: red;
+.text-li {
+  text-align: left;
+}
+
+.size-li {
+  font-size: 2rem;
 }

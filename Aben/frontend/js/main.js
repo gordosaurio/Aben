@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const icon = document.createElement("i");
             icon.classList.add("fa-solid", "fa-plus");
+            icon.classList.add("size-li");
             icon.style.flex = "0 0 5%";
 
 
@@ -45,12 +46,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (task.status === "0") {
                 taskText.classList.add("strikethrough");
             }
+            taskText.classList.add("text-li");
+            taskText.classList.add("size-li");
             taskText.style.flex = "0 0 60%";
 
             // Botón de eliminar
             const deleteButton = document.createElement("button");
             deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
             deleteButton.classList.add("color-icon");
+            deleteButton.classList.add("size-li");
             deleteButton.onclick = () => openDeleteModal(task.id);
             deleteButton.style.flex = "0 0 10%";
 
@@ -58,6 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const updateButton = document.createElement("button");
             updateButton.innerHTML = '<i class="fa-solid fa-pencil"></i>';
             updateButton.classList.add("color-icon");
+            updateButton.classList.add("size-li");
             updateButton.onclick = () => openEditModal(task);
             updateButton.style.flex = "0 0 10%";
 
@@ -65,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const activateButton = document.createElement("button");
             activateButton.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>';
             activateButton.classList.add("color-icon");
+            activateButton.classList.add("size-li");
             activateButton.onclick = () => openActivateModal(task.id);
             activateButton.style.flex = "0 0 10%";
 
@@ -72,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const deactivateButton = document.createElement("button");
             deactivateButton.innerHTML = '<i class="fa-solid fa-check"></i>';
             deactivateButton.classList.add("color-icon");
+            deactivateButton.classList.add("size-li");
             deactivateButton.onclick = () => openDeactivateModal(task.id);
             deactivateButton.style.flex = "0 0 10%";
 
