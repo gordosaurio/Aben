@@ -31,6 +31,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         tasks.forEach(task => {
             const li = document.createElement("li");
+
+
+            const icon = document.createElement("i");
+            icon.classList.add("fa-solid", "fa-plus");
+
+
             const taskText = document.createElement("span");
             taskText.textContent = `${task.title} - ${task.description}`;
 
@@ -62,6 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             deactivateButton.classList.add("color-icon");
             deactivateButton.onclick = () => openDeactivateModal(task.id);
 
+            li.appendChild(icon);
             li.appendChild(taskText);
             li.appendChild(deleteButton);
             li.appendChild(updateButton);

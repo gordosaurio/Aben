@@ -46,6 +46,7 @@ button {
 }
 
 .color-icon {
+  border: 2px solid black;
   color: black;
 }
 
@@ -82,4 +83,9 @@ body {
 .strikethrough {
   text-decoration: line-through;
   color: gray;
+}
+
+ul {
+  list-style-type: none; /* Elimina el marcador predeterminado */
+  padding-left: 0; /* Elimina el espacio de la izquierda */
 }
