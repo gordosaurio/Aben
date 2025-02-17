@@ -40,22 +40,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // Botón de eliminar
             const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Eliminar";
+            deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            deleteButton.classList.add("color-icon");
             deleteButton.onclick = () => openDeleteModal(task.id);
 
             // Botón de editar
             const updateButton = document.createElement("button");
-            updateButton.textContent = "Editar";
+            updateButton.innerHTML = '<i class="fa-solid fa-pencil"></i>';
+            updateButton.classList.add("color-icon");
             updateButton.onclick = () => openEditModal(task);
 
             // Botón activar
             const activateButton = document.createElement("button");
-            activateButton.textContent = "Activar";
+            activateButton.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>';
+            activateButton.classList.add("color-icon");
             activateButton.onclick = () => openActivateModal(task.id);
 
             // Botón desactivar
             const deactivateButton = document.createElement("button");
-            deactivateButton.textContent = "Desactivar";
+            deactivateButton.innerHTML = '<i class="fa-solid fa-check"></i>';
+            deactivateButton.classList.add("color-icon");
             deactivateButton.onclick = () => openDeactivateModal(task.id);
 
             li.appendChild(taskText);
