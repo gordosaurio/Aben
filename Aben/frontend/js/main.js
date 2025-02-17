@@ -63,11 +63,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             li.appendChild(updateButton);
 
             if (task.status === "1") {
-                console.log("entro a desactivado");
                 li.appendChild(deactivateButton);
             } else {
-                console.log("entro a activado");
-                console.log(task.status);
                 li.appendChild(activateButton);
             }
             taskList.appendChild(li);
