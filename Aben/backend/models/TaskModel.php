@@ -56,19 +56,6 @@ class TaskModel {
         return true;
     }
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
     public function updateTask($id, $title, $description, $status) {
         // Validar ID
         if (!is_numeric($id) || $id <= 0) {
@@ -120,21 +107,6 @@ class TaskModel {
 
         return ["success" => $success, "message" => $success ? "Tarea actualizada correctamente" : "No se pudo actualizar la tarea"];
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function deleteTask($id) {
         // Validar que el ID sea un número entero válido
