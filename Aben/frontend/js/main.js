@@ -32,15 +32,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         tasks.forEach(task => {
             const li = document.createElement("li");
 
+            // esilos lista
             li.style.display = "flex";
             li.style.alignItems = "center";
 
+            // icono plus
             const icon = document.createElement("i");
             icon.classList.add("fa-solid", "fa-plus");
             icon.classList.add("size-li");
             icon.style.flex = "0 0 5%";
 
-
+            // descripcion tarea
             const taskText = document.createElement("span");
             taskText.textContent = `${task.title} - ${task.description}`;
             if (task.status === "0") {
