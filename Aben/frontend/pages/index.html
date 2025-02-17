@@ -8,15 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    
+    
     <div class="container">
         <h1>Lista de Tareas</h1>
         <form id="taskForm">
-            <input type="text" id="title" placeholder="Título" required>
-            <textarea id="description" placeholder="Descripción"></textarea>
-            <button class="createTask" type="submit">Crear Tarea</button>
+            <div class="form-grid">
+                <div class="input-group">
+                    <input type="text" id="title" placeholder="Título" required>
+                    <textarea id="description" placeholder="Descripción"></textarea>
+                </div>
+                <button class="createTask" type="submit">Crear Tarea</button>
+            </div>
         </form>
         <ul id="taskList"></ul>
     </div>
+
 
     <!-- Modal de edición (oculto por defecto) -->
     <div id="editModal" class="modal">

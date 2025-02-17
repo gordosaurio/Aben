@@ -4,8 +4,30 @@
   height: 80vh;
 }
 
+.form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* La columna izquierda es más ancha */
+  gap: 10px;
+  align-items: stretch; /* Asegura que las columnas tengan la misma altura */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column; /* Los inputs se apilan en columna */
+  gap: 10px; /* Espacio entre el título y la descripción */
+}
+
 .createTask {
-  background-color: red;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .task {
