@@ -32,41 +32,48 @@ document.addEventListener("DOMContentLoaded", async () => {
         tasks.forEach(task => {
             const li = document.createElement("li");
 
+            li.style.display = "flex";
+            li.style.alignItems = "center";
 
             const icon = document.createElement("i");
             icon.classList.add("fa-solid", "fa-plus");
+            icon.style.flex = "0 0 5%";
 
 
             const taskText = document.createElement("span");
             taskText.textContent = `${task.title} - ${task.description}`;
-
             if (task.status === "0") {
                 taskText.classList.add("strikethrough");
             }
+            taskText.style.flex = "0 0 60%";
 
             // Botón de eliminar
             const deleteButton = document.createElement("button");
             deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
             deleteButton.classList.add("color-icon");
             deleteButton.onclick = () => openDeleteModal(task.id);
+            deleteButton.style.flex = "0 0 10%";
 
             // Botón de editar
             const updateButton = document.createElement("button");
             updateButton.innerHTML = '<i class="fa-solid fa-pencil"></i>';
             updateButton.classList.add("color-icon");
             updateButton.onclick = () => openEditModal(task);
+            updateButton.style.flex = "0 0 10%";
 
             // Botón activar
             const activateButton = document.createElement("button");
             activateButton.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>';
             activateButton.classList.add("color-icon");
             activateButton.onclick = () => openActivateModal(task.id);
+            activateButton.style.flex = "0 0 10%";
 
             // Botón desactivar
             const deactivateButton = document.createElement("button");
             deactivateButton.innerHTML = '<i class="fa-solid fa-check"></i>';
             deactivateButton.classList.add("color-icon");
             deactivateButton.onclick = () => openDeactivateModal(task.id);
+            deactivateButton.style.flex = "0 0 10%";
 
             li.appendChild(icon);
             li.appendChild(taskText);

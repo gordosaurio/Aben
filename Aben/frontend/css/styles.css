@@ -89,3 +89,15 @@ ul {
   list-style-type: none; /* Elimina el marcador predeterminado */
   padding-left: 0; /* Elimina el espacio de la izquierda */
 }
+
+li button {
+  margin-left: 1%; /* Espacio entre los botones */
+}
+
+li i {
+  margin-right: 1%; /* Espacio entre el ícono y el texto */
+}
+
+.color-prueba {
+  background-color: red;
+}
