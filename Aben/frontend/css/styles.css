@@ -40,3 +40,8 @@ body {
   width: 300px;
   text-align: center;
 }
+
+.strikethrough {
+  text-decoration: line-through;
+  color: gray;
+}

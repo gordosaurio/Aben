@@ -12,9 +12,6 @@ async function getTasks() {
         // Obtener el contenido como texto antes de intentar parsear JSON
         const text = await response.text();
 
-        console.log("vamos a mostrar el text");
-        console.log(text);
-
         // Intentar convertir a JSON
         const data = JSON.parse(text);
         return data;
@@ -52,15 +49,8 @@ async function deleteTask(id) {
     }
 }
 
-
-
-
-
-
-
 async function updateTask(id, title, description) {
     console.log("Enviando solicitud PUT a:", `${API_URL}/tasks/${id}`);
-
     const response = await fetch(`${API_URL}/tasks/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

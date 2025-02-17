@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             const taskText = document.createElement("span");
             taskText.textContent = `${task.title} - ${task.description}`;
 
+            if (task.status === "0") {
+                taskText.classList.add("strikethrough");
+            }
+
             // Botón de eliminar
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Eliminar";
@@ -57,22 +61,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             li.appendChild(taskText);
             li.appendChild(deleteButton);
             li.appendChild(updateButton);
-            li.appendChild(activateButton);
-            li.appendChild(deactivateButton);
+
+            if (task.status === "1") {
+                console.log("entro a desactivado");
+                li.appendChild(deactivateButton);
+            } else {
+                console.log("entro a activado");
+                console.log(task.status);
+                li.appendChild(activateButton);
+            }
             taskList.appendChild(li);
         });
     }
-
-
-
-
-
-
-
-
-
-
-
 
     // Función para abrir el modal de activación
     function openActivateModal(id) {
@@ -111,14 +111,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     cancelDeactivate.addEventListener("click", () => {
         confirmDeactivateModal.style.display = "none";
     });
-
-
-
-
-
-
-
-
 
     // Función para abrir el modal de edición
     function openEditModal(task) {
@@ -173,19 +165,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("description").value = "";
     });
 
-
-
-
-
-
-
-
-
-
     // Evento para enviar el formulario de edición
     editForm.addEventListener("submit", async (event) => {
         event.preventDefault(); // 🔥 Evita recargar la página
-
         const id = editTaskId.value;
         const title = editTitle.value;
         const description = editDescription.value;
@@ -200,23 +182,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error("Error al actualizar tarea:", error);
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // Cancelar la creación
     cancelCreate.addEventListener("click", () => {
