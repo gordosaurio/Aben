@@ -51,6 +51,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Función para abrir el modal de edición
     function openEditModal(task) {
         editTaskId.value = task.id;
@@ -63,6 +76,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     function openDeleteModal(id) {
         deleteTaskId.value = id;
         confirmDeleteModal.style.display = "flex";
+    }
+
+    function closeEditModal() {
+        editModal.style.display = "none";
     }
 
     // Cerrar el modal de edición
@@ -99,6 +116,51 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
     });
+
+
+
+
+
+
+
+
+
+
+    // Evento para enviar el formulario de edición
+    editForm.addEventListener("submit", async (event) => {
+        event.preventDefault(); // 🔥 Evita recargar la página
+
+        const id = editTaskId.value;
+        const title = editTitle.value;
+        const description = editDescription.value;
+
+        try {
+            console.log("entro a try");
+            await updateTask(id, title, description);
+            console.log("despue funcon");
+            closeEditModal(); // 🔥 Cierra el modal tras actualizar
+            await loadTasks(); // 🔥 Recarga la lista de tareas
+        } catch (error) {
+            console.error("Error al actualizar tarea:", error);
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Cancelar la creación
     cancelCreate.addEventListener("click", () => {

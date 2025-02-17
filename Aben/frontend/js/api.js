@@ -49,15 +49,23 @@ async function deleteTask(id) {
     }
 }
 
+
+
+
+
+
+
 async function updateTask(id, title, description) {
-    const response = await fetch(`${API_URL}/${id}`, {
+    console.log("Enviando solicitud PUT a:", `${API_URL}/tasks/${id}`);
+
+    const response = await fetch(`${API_URL}/tasks/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, description })
+        body: JSON.stringify({ title, description }) // Enviar solo title y description
     });
 
     if (!response.ok) {
-        console.error("Error al actualizar la tarea");
+        throw new Error("Error al actualizar la tarea");
     }
 
     return response.json();

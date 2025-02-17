@@ -23,6 +23,7 @@ if (!isset($uri[0]) || $uri[0] !== "tasks") {
     exit;
 }
 
+
 switch ($method) {
     case "GET":
         if (isset($uri[1])) {
@@ -40,7 +41,7 @@ switch ($method) {
     case "PUT":
         if (isset($uri[1])) {
             $data = json_decode(file_get_contents("php://input"), true);
-            $taskController->updateTask($uri[1], $data);
+            $taskController->updateTask($uri[2], $data);
         } else {
             echo json_encode(["error" => "Task ID is required"]);
         }

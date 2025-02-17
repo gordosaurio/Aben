@@ -43,10 +43,12 @@ class TaskController {
     public function updateTask($id, $data) {
         $title = $data['title'] ?? null;
         $description = $data['description'] ?? null;
-        $status = $data['status'] ?? 'pending';
-
+        $status = isset($data['status']) ? (int)$data['status'] : 1;
+    
         $result = $this->taskModel->updateTask($id, $title, $description, $status);
-        echo json_encode(["success" => $result, "message" => $result ? "Task updated successfully" : "Failed to update task"]);
+    
+        // 🔥 Aquí solo se imprime JSON una vez
+        echo json_encode($result);
     }
 
     public function deleteTask($id) {
